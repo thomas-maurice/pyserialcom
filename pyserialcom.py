@@ -171,12 +171,15 @@ class MainWindow:
 		self.textEntry.set_can_focus(True)
 		self.sendButton = gtk.Button("Send")
 		self.clearButton = gtk.Button("Clear")
+		self.addCRCheckbutton = gtk.CheckButton('Add CR')
+		self.addCRCheckbutton.set_active(True)
 		
 		self.textEntry.connect("activate", self.serialSend)
 		self.sendButton.connect("clicked", self.serialSend)
 		self.clearButton.connect("clicked", self.clearBuffer)
 		
 		self.sendBarLayout.pack_start(self.textEntry, gtk.SHRINK)
+		self.sendBarLayout.pack_start(self.addCRCheckbutton, gtk.SHRINK)
 		self.sendBarLayout.pack_start(self.sendButton, gtk.SHRINK)
 		self.sendBarLayout.pack_start(self.clearButton, gtk.SHRINK)
 	
@@ -223,8 +226,11 @@ class MainWindow:
 		if self.textEntry.get_text() == "":
 			return
 		
-		print ">", self.textEntry.get_text()
-		if self.serialport.write(self.textEntry.get_text()+"\n") < 0:
+		text = self.textEntry.get_text()
+		if self.addCRCheckbutton.get_active():
+			text += "\n"
+		print ">", text
+		if self.serialport.write(text) < 0:
 			print "Error sending message :("
 			self.textBuffer.insert(self.textBuffer.get_end_iter(), "\n>> Error sending message\n")
 
