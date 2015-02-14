@@ -20,6 +20,7 @@ To run this software you need:
  * python (version 2.7.5 in my case but works fine with 2.6 too)
  * pyGTK (version >= 2.0)
  * pyserial (the latest the better)
+ * docopt
 
 You simply run the program by typing ```./pyserialcom.py``` in
 a terminal and here you go ! It will try to find the first USB to serial
