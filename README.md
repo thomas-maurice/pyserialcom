@@ -29,7 +29,17 @@ adapter and open it (ttyACMX ot ttyUSBX devices), the default baudrate is 9600.
 ## More precise syntax
 If you require a specific port or baudrate, here is the compete syntax :
 
-    pyserialcom.py [/dev/ttyPORT=auto] [baudrate=9600]
+    Usage:
+        pyserialcom.py [--baudrate=<BAUD>] [--port=<PORT>]
+        
+    Options:
+        -h --help                      Displays help
+        -p PORT --port=<PORT>          The serial port file to use
+        -b BAUD --baudrate=<BAUD>      The baudrate to use [default: 9600]
+        
+    If no options are provided, the default 9600 baudrate will be used
+    and the serial port will be detected from any /dev/ttyACM* or /dev/ttyUSB*
+
 
 
 ## Display modes

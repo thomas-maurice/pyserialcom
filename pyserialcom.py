@@ -240,7 +240,7 @@ class MainWindow:
         """
         if self.textEntry.get_text() == "":
             return
-
+            
         text = self.textEntry.get_text()
         if self.addCRCheckbutton.get_active():
             text += "\r\n"
