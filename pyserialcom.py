@@ -41,6 +41,21 @@ import sys
 import select
 import threading
 import string
+import docopt
+
+help="""pyserialcom.py - A neat serial tool in only one file !
+
+Usage:
+    pyserialcom.py [--baudrate=<BAUD>] [--port=<PORT>]
+
+Options:
+    -h --help                      Displays help
+    -p PORT --port=<PORT>          The serial port file to use
+    -b BAUD --baudrate=<BAUD>      The baudrate to use [default: 9600]
+
+If no options are provided, the default 9600 baudrate will be used
+and the serial port will be detected from any /dev/ttyACM* or /dev/ttyUSB*
+"""
 
 class MainWindow:
     def __init__(self, port=None, baudrate=9600):
@@ -247,12 +262,9 @@ class MainWindow:
         gtk.main()
 
 if __name__ == "__main__":
-    if len(sys.argv) == 1:
-        w = MainWindow()
-    if len(sys.argv) == 2:
-        w = MainWindow(sys.argv[1])
-    elif len(sys.argv) == 3:
-        w = MainWindow(sys.argv[1], int(sys.argv[2]))
+    arguments = docopt.docopt(help)
+    print arguments
+    w = MainWindow(arguments['--port'], int(arguments['--baudrate']))
     try:
         w.main()
     except KeyboardInterrupt:
